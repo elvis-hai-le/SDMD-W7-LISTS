@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class NumberAdapter(private val data: List<Int>) : RecyclerView.Adapter<NumberAdapter.ViewHolder>()  {
+class NumberAdapter(private val data: List<Int>,
+                    private val listener: (Int) -> Unit) : RecyclerView.Adapter<NumberAdapter.ViewHolder>()  {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater
             .inflate(R.layout.layout_row, parent, false) as View
@@ -18,22 +19,17 @@ class NumberAdapter(private val data: List<Int>) : RecyclerView.Adapter<NumberAd
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NumberAdapter.ViewHolder, position: Int) {
         val item = data[position]
         holder.bind(item)
     }
 
-    class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
+    inner class ViewHolder(private val v: View) : RecyclerView.ViewHolder(v) {
         private val number: TextView = v.findViewById(R.id.number)
 
         fun bind(item: Int) {
             number.text = item.toString()
-
-            v.setOnClickListener {
-                val i = Intent(it.context, DetailActivity::class.java)
-                i.putExtra("NUMBER", item)
-                it.context.startActivity(i)
-            }
+            v.setOnClickListener { listener(item) }
         }
 
     }
