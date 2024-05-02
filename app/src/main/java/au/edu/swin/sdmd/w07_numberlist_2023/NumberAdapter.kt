@@ -15,7 +15,7 @@ class NumberAdapter(private val data: List<Int>) : RecyclerView.Adapter<NumberAd
         return ViewHolder(view)
     }
 
-    override fun getItemCount() = 0
+    override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: NumberAdapter.ViewHolder, position: Int) {
         val item = data[position]
@@ -26,7 +26,7 @@ class NumberAdapter(private val data: List<Int>) : RecyclerView.Adapter<NumberAd
         private val number: TextView = v.findViewById(R.id.number)
 
         fun bind(item: Int) {
-
+            number.text = item.toString()
         }
 
     }
