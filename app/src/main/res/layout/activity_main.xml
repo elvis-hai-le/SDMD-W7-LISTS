@@ -9,6 +9,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/numberList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="-41dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
